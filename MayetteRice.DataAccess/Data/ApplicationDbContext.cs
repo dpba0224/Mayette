@@ -15,6 +15,11 @@ namespace MayetteRice.DataAccess.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -53,6 +58,42 @@ namespace MayetteRice.DataAccess.Data
                     DiscPrice = 53.00,
                     CategoryId = 1,
                     ImageUrl = ""
+                }
+            );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company 
+                { 
+                    Id = 1,
+                    Name = "Coca-Cola Beverages Philippines Inc.",
+                    StreetAddress = "Santa Rosa Exit",
+                    Barangay = "Pulong Santa Cruz",
+                    City = "Santa Rosa",
+                    Province = "Laguna",
+                    PostalCode = "4026",
+                    PhoneNumber = "+639061234567"
+                },
+                new Company
+                {
+                    Id = 2,
+                    Name = "Amherst Laboratories Inc.",
+                    StreetAddress = "Unilab PharmaCampus",
+                    Barangay = "Mamplasan",
+                    City = "Binan",
+                    Province = "Laguna",
+                    PostalCode = "4026",
+                    PhoneNumber = "+639067654321"
+                },
+                new Company
+                {
+                    Id = 3,
+                    Name = "Santa Rosa City Hall",
+                    StreetAddress = "J.P. Rizal Street",
+                    Barangay = "Malusak",
+                    City = "Santa Rosa",
+                    Province = "Laguna",
+                    PostalCode = "4026",
+                    PhoneNumber = "+639977654321"
                 }
             );
         }

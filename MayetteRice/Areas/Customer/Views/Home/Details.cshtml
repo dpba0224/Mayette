@@ -1,11 +1,15 @@
-﻿@model Product
+﻿@model ShoppingCart
 
 <form method="post">
+
+    @* This is added so that from the controller, when the shopping cart is received, the ProductId will be populated. *@
+    <input hidden asp-for="ProductId" />
+
     <div class="card shadow border-0 mt-4 mb-4">
         <div class="card-header bg-primary bg-gradient text-light py-4">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h3 class="text-white text-uppercase">@Model.Title</h3>
+                    <h3 class="text-white text-uppercase">@Model.Product.Title</h3>
                 </div>
             </div>
         </div>
@@ -20,20 +24,20 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
-                        <img src="@Model.ImageUrl" width="100%" class="rounded" />
+                        <img src="@Model.Product.ImageUrl" width="100%" class="rounded" />
                     </div>
                     <div class="col-12 col-lg-6 offset-lg-1">
                         <div class="col-12 col-md-6 pb-4">
-                            <span class="badge bg-primary">Category: @Model.Category.Name</span>
+                            <span class="badge bg-primary">Category: @Model.Product.Category.Name</span>
                         </div>
                         <div class="row pl-2">
                             <h5>Description:</h5>
                             @* Html.Raw is used to bring the formatting of the text used in the description.*@
-                            <p class="text-dark lh-sm">@Html.Raw(Model.Description)</p>
+                            <p class="text-dark lh-sm">@Html.Raw(Model.Product.Description)</p>
                         </div>
                         <div class="row text-center ps-2">
                             <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                                <div class="text-dark fw-semibold">Quantity</div>
+                                <div class="text-dark fw-semibold">Quantity:</div>
                             </div>
                             <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
                                 <div class="text-dark fw-semibold">1-10</div>
@@ -44,13 +48,13 @@
                         </div>
                         <div class="row text-center ps-2 pb-4">
                             <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>Price</div>
+                                <div>Price:</div>
                             </div>
                             <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>Php @Model.Price.ToString()</div>
+                                <div>Php @Model.Product.Price.ToString()</div>
                             </div>
                             <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>Php @Model.DiscPrice.ToString()</div>
+                                <div>Php @Model.Product.DiscPrice.ToString()</div>
                             </div>
                         </div>
                         
@@ -61,16 +65,16 @@
                                           id="inputGroup-sizing-default">
                                         Count
                                     </span>
-                                    <input type="number" value="1" class="form-control text-end"
+                                    <input asp-for="Count" type="number" value="1" class="form-control text-end"
                                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6 pb-1">
-                                <button type="submit" disabled
+                                <button type="submit" 
                                         class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
-                                    Add to Cart (Comming Soon...)
+                                    Add to Cart
                                 </button>
                             </div>
                         </div>

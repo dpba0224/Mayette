@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MayetteRice.DataAccess.Data;
 using MayetteRice.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MayetteRice.DataAccess.Repository
 {
@@ -29,9 +30,18 @@ namespace MayetteRice.DataAccess.Repository
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
         {
-            IQueryable<T> query = dbSet;
+            IQueryable<T> query;
+            if (tracked) 
+            {
+                query = dbSet;
+            }
+            else
+            {
+                query = dbSet.AsNoTracking();  
+            }
+
             query = query.Where(filter);
 
             if (!string.IsNullOrEmpty(includeProperties))
@@ -47,9 +57,14 @@ namespace MayetteRice.DataAccess.Repository
         }
 
         // Basically if someone gives a Category or CoverType (Category, CoverType), we can build to include these properties
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+
+            if (filter != null) 
+            {
+                query = query.Where(filter);
+            }
 
             if(!string.IsNullOrEmpty(includeProperties)) 
             { 

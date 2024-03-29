@@ -13,10 +13,10 @@ namespace MayetteRice.DataAccess.Repository.IRepository
         // T - Category or any generic model present in the project
 
         // This retrieves all items or entities present in a model
-        IEnumerable<T> GetAll(string? includeProperties = null);
+        IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter=null, string? includeProperties = null);
 
         // This retrieves only one item or entity from the model
-        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null);
+        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false);
 
         // Methods for entities or items present in the model
         void Add(T entity);

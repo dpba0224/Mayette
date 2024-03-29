@@ -1,11 +1,14 @@
 ﻿using MayetteRice.DataAccess.Data;
 using MayetteRice.DataAccess.Repository.IRepository;
 using MayetteRice.Models;
+using MayetteRice.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MayetteRice.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         // Dependency Injection
