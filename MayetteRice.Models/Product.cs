@@ -38,5 +38,7 @@ namespace MayetteRice.Models
 
         [ValidateNever]
         public string ImageUrl { get; set; }
+
+        public int TestProperty { get; set; }
     }
 }
